@@ -1,0 +1,2578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abhang Diagnostic Center</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <style>
+        :root {
+            --primary-color: #007bff;
+            /* Medical Blue */
+            --glass-blur: 10px;
+        }
+
+        /* 8. Glossy / Glassmorphism Navbar */
+        .glass-navbar {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(var(--glass-blur));
+        }
+    </style>
+
+    <style>
+        :root {
+            --blue-primary: #1e40af;
+            /* Tailwind blue-700 */
+            --blue-light: #3b82f6;
+            /* Tailwind blue-500 */
+            --glass-blur: 10px;
+        }
+
+        /* 8. Glossy / Glassmorphism Navbar */
+        .glass-navbar {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(var(--glass-blur));
+        }
+
+        /* 5. Preloader Animation */
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--blue-primary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* 3. Floating Button Animation (Subtle Bob) */
+        @keyframes float-animation {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .float-animation {
+            animation: float-animation 3s ease-in-out infinite;
+        }
+
+        /* 1. Hero Blob Animation */
+        @keyframes blob-move {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+        }
+
+        .blob {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(50px);
+            animation: blob-move 10s infinite alternate;
+            z-index: 0;
+        }
+
+        .blob-1 {
+            top: 10%;
+            left: 5%;
+            background-color: #3b82f6;
+        }
+
+        /* blue-500 */
+        .blob-2 {
+            bottom: 5%;
+            right: 10%;
+            background-color: #1abc9c;
+            animation-delay: 2s;
+        }
+
+        /* Custom Neon */
+        .blob-3 {
+            top: 70%;
+            left: 30%;
+            background-color: #ef4444;
+            animation-delay: 4s;
+        }
+
+        /* red-500 */
+
+        /* Hero Slider Gradient Overlay */
+        .gradient-overlay {
+            background: linear-gradient(90deg,
+                    rgba(0, 0, 0, 0.6) 0%,
+                    rgba(0, 0, 0, 0.1) 100%);
+        }
+    </style>
+
+    <style>
+        /* ... (other custom styles) ... */
+
+        /* SCROLL WORD-LENGTH UNDERLINE */
+        .reveal-underline {
+            display: inline-block;
+            position: relative;
+            padding-bottom: 6px;
+        }
+
+        .reveal-underline::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 0;
+            /* START STATE */
+            background: #3b82f6;
+            transition: width 3s ease-in-out;
+            /* ANIMATION DEFINITION */
+        }
+
+        /* Active Animation */
+        .reveal-active.reveal-underline::after {
+            width: 100%;
+            /* END STATE */
+        }
+
+        /* ... (other custom styles) ... */
+    </style>
+
+    <style>
+        /* --- Preloader Custom CSS --- */
+        /* Simple heartbeat pulse effect for the icon */
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .heartbeat-container .animate-pulse {
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        /* Subtle loading text animation */
+        @keyframes loading-dots {
+
+            0%,
+            20% {
+                content: "Abhang Diagnostic Center";
+            }
+
+            40% {
+                content: "Abhang Diagnostic Center.";
+            }
+
+            60% {
+                content: "Abhang Diagnostic Center..";
+            }
+
+            80%,
+            100% {
+                content: "Abhang Diagnostic Center...";
+            }
+        }
+
+        .loading-text:after {
+            content: "Abhang Diagnostic Center...";
+            /* Fallback */
+            display: inline-block;
+            animation: loading-dots 2s infinite steps(1);
+            animation-delay: 0.5s;
+            width: 100%;
+            /* Important for text alignment */
+            text-align: center;
+        }
+
+        /* Hide the default text for the animated one */
+        .loading-text {
+            visibility: hidden;
+            position: relative;
+        }
+
+        .loading-text::after {
+            visibility: visible;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Progress Bar Look Animation (Moving Stripe) */
+        @keyframes move-bar {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(400%);
+                /* Moves the stripe across */
+            }
+        }
+
+        .progress-bar-segment {
+            animation: move-bar 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+
+    <style>
+        /* Subtle floating animation for logo */
+        .float-animation {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* --- New CSS for Better Social Bar Float Isolation --- */
+        .social-bar-wrapper {
+            /* Use margin or a specific size to control the bar's position and spacing */
+            padding: 5px 0;
+            /* Add a little vertical padding inside the floating element */
+        }
+    </style>
+
+
+</head>
+
+<body class="font-sans text-gray-800 relative">
+
+    <div id="scrollProgress" class="fixed top-0 left-0 h-1 bg-blue-600 z-[9999] w-0 transition-all duration-75"></div>
+
+    <div class="fixed left-0 top-1/2 transform -translate-y-1/2 z-40 hidden md:block">
+        <div class="social-bar-wrapper float-animation">
+            <div class="flex flex-col space-y-2">
+
+                <a href="https://wa.me/919130319093" target="_blank"
+                    class="w-12 h-12 flex items-center justify-center bg-green-500 rounded-r-lg shadow-lg hover:bg-green-600 transition duration-300 transform hover:scale-105"
+                    title="WhatsApp Chat">
+                    <i class="fab fa-whatsapp text-white text-2xl"></i>
+                </a>
+
+                <a href="https://facebook.com/AarambhXRayCenter" target="_blank"
+                    class="w-12 h-12 flex items-center justify-center bg-blue-700 rounded-r-lg shadow-lg hover:bg-blue-800 transition duration-300 transform hover:scale-105"
+                    title="Follow us on Facebook">
+                    <i class="fab fa-facebook-f text-white text-xl"></i>
+                </a>
+
+                <a href="https://instagram.com/AarambhXRayCenter" target="_blank"
+                    class="w-12 h-12 flex items-center justify-center bg-pink-600 rounded-r-lg shadow-lg hover:bg-pink-700 transition duration-300 transform hover:scale-105"
+                    title="Follow us on Instagram">
+                    <i class="fab fa-instagram text-white text-xl"></i>
+                </a>
+
+                <a href="mailto:info@aarambhxray.com"
+                    class="w-12 h-12 flex items-center justify-center bg-gray-600 rounded-r-lg shadow-lg hover:bg-gray-700 transition duration-300 transform hover:scale-105"
+                    title="Send us an Email">
+                    <i class="fas fa-envelope text-white text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="preloader"
+        class="fixed inset-0 bg-white flex flex-col items-center justify-center z-[9999] opacity-100 transition-opacity duration-700">
+
+        <div class="heartbeat-container mb-4">
+            <i class="fas fa-heart-pulse text-6xl text-blue-600 animate-pulse"></i>
+        </div>
+
+        <p class="loading-text text-xl text-blue-700 font-semibold mt-4">
+            Loading Abhang Diagnostic Center...
+        </p>
+
+        <div class="w-48 h-1 bg-gray-200 rounded-full overflow-hidden mt-6">
+            <div class="progress-bar-segment bg-blue-500 h-full w-1/4 rounded-full"></div>
+        </div>
+    </div>
+
+    <nav id="navbar" class="w-full fixed top-0 left-0 z-50 glass-navbar shadow-lg transition-all duration-300">
+        <div id="infoBar" class="w-full bg-blue-700 text-white text-sm">
+            <div
+                class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between py-2 px-6 space-y-1 lg:space-y-0">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-clock h-4 text-white"></i>
+                    <p class="font-medium text-center lg:text-left">
+                        <strong>Sonography:</strong> 8:00 AM - 6:00 PM | <strong>X-Ray:</strong> 8:00 AM - 8:00 PM
+                    </p>
+                </div>
+
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-phone h-4 text-white"></i>
+                    <p class="font-medium flex flex-col lg:flex-row lg:space-x-4 text-center lg:text-left">
+                        <span>+91 99304 46307</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3 transition-all duration-300">
+            <!-- <div class="flex items-center space-x-3">
+                <img src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png"
+                    class="h-10 md:h-12 drop-shadow-lg float-animation" alt="X-Ray Care Logo" />
+                <h1
+                    class="text-xl md:text-3xl font-extrabold bg-gradient-to-r from-blue-600 to-blue-800 text-transparent bg-clip-text tracking-wide">
+                    X-Ray Care
+                </h1>
+            </div> -->
+
+            <div class="flex items-center space-x-3">
+                <img src="image/logo.jpg" class="h-10 md:h-12 drop-shadow-lg float-animation"
+                    alt="Abhang Diagnostic Center Logo" />
+
+                <h1 class="tracking-wide">
+                    <span class="block text-lg md:text-xl font-bold 
+            bg-gradient-to-r from-blue-600 to-blue-800 text-transparent bg-clip-text leading-tight whitespace-nowrap">
+                        Abhang Diagnostic Center
+                    </span>
+                    <span class="block text-xs text-gray-600 font-semibold tracking-wider">
+                        Sonography and X-ray Clinic
+                    </span>
+                </h1>
+            </div>
+
+            <button id="menuToggle" class="xl:hidden text-2xl text-blue-700 focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul id="desktopNavLinks" class="hidden xl:flex space-x-6 font-semibold text-gray-700 text-base">
+                <li><a href="#home" class="nav-item transition duration-200">Home</a></li>
+                <li><a href="#about" class="nav-item transition duration-200">About</a></li>
+                <li><a href="#services" class="nav-item transition duration-200">Services</a></li>
+
+                <li id="moreDropdownParent" class="relative">
+                    <a href="#" class="nav-item flex items-center transition duration-200 hover:text-blue-700">
+                        More <i class="fas fa-chevron-down text-xs ml-1 transition-transform more-icon"></i>
+                    </a>
+
+                    <div id="moreDropdownPanel"
+                        class="absolute hidden w-52 bg-white shadow-xl rounded-lg mt-3 py-2 z-50 border border-gray-100 animate-fade-in">
+                        <a href="#our-team"
+                            class="dropdown-link block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition">
+                            <i class="fas fa-user-md mr-2"></i> Our Team
+                        </a>
+                        <a href="#procedures"
+                            class="dropdown-link block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition">
+                            <i class="fas fa-images mr-2"></i> Gallery (Procedures)
+                        </a>
+                        <a href="#accreditations"
+                            class="dropdown-link block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition">
+                            <i class="fas fa-award mr-2"></i> Certifications
+                        </a>
+                        <!-- <a href="#success-story"
+                            class="dropdown-link block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition">
+                            <i class="fas fa-heart mr-2"></i> Success Story
+                        </a> -->
+                        <div class="border-t border-gray-100 my-1"></div>
+                        <a href="#testimonials"
+                            class="dropdown-link block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition">
+                            <i class="fas fa-star mr-2"></i> Testimonials
+                        </a>
+                        <a href="#faq"
+                            class="dropdown-link block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition">
+                            <i class="fas fa-question-circle mr-2"></i> FAQ
+                        </a>
+                    </div>
+                </li>
+
+                <li><a href="#contact" class="nav-item transition duration-200">Contact</a></li>
+            </ul>
+
+            <a href="#appointment"
+                class="hidden lg:block bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full font-semibold shadow-lg transition duration-300">
+                Book Appointment
+            </a>
+        </div>
+
+        <div id="mobileMenu" class="hidden xl:hidden bg-white/95 backdrop-blur-xl border-t border-gray-200">
+            <ul class="flex flex-col space-y-1 p-4 font-semibold text-gray-800">
+
+                <li><a href="#home"
+                        class="block py-2 rounded px-2 hover:bg-blue-50 hover:text-blue-700 transition">Home</a>
+                </li>
+                <li><a href="#about"
+                        class="block py-2 rounded px-2 hover:bg-blue-50 hover:text-blue-700 transition">About
+                        Center</a>
+                </li>
+                <li><a href="#services"
+                        class="block py-2 rounded px-2 hover:bg-blue-50 hover:text-blue-700 transition">Our
+                        Services</a>
+                </li>
+
+                <div class="mt-2 pt-2 space-y-1 border-t border-gray-200 bg-gray-50 rounded-lg p-2">
+                    <li class="px-2 text-blue-600 font-bold text-xs uppercase tracking-wider mb-1">More Sections:</li>
+
+                    <li><a href="#procedures"
+                            class="block py-1 px-2 text-sm text-gray-700 hover:bg-white hover:text-blue-700 transition">Gallery</a>
+                    </li>
+                    <li><a href="#our-team"
+                            class="block py-1 px-2 text-sm text-gray-700 hover:bg-white hover:text-blue-700 transition">Team</a>
+                    </li>
+                    <li><a href="#accreditations"
+                            class="block py-1 px-2 text-sm text-gray-700 hover:bg-white hover:text-blue-700 transition">Certifications</a>
+                    </li>
+                    <!-- <li><a href="#success-story"
+                            class="block py-1 px-2 text-sm text-gray-700 hover:bg-white hover:text-blue-700 transition">Success
+                            Stories</a></li> -->
+                    <li><a href="#testimonials"
+                            class="block py-1 px-2 text-sm text-gray-700 hover:bg-white hover:text-blue-700 transition">Reviews</a>
+                    </li>
+                    <li><a href="#faq"
+                            class="block py-1 px-2 text-sm text-gray-700 hover:bg-white hover:text-blue-700 transition">FAQ</a>
+                    </li>
+                </div>
+
+                <li class="border-t pt-2 mt-2">
+                    <a href="#contact"
+                        class="block py-2 rounded px-2 hover:bg-blue-50 hover:text-blue-700 transition">Contact Us</a>
+                </li>
+                <li class="pt-2">
+                    <a href="#appointment"
+                        class="block text-center bg-blue-600 text-white py-2 rounded-full font-bold shadow-md hover:bg-blue-700 transition">Book
+                        Now</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const navbar = document.getElementById('navbar');
+            const infoBar = document.getElementById('infoBar');
+            // ... (other variables for desktop/dropdown)
+
+            // --- 1. Mobile Menu Toggle Functionality (REINFORCED) ---
+            // This is the key logic that needs to execute properly on click
+            menuToggle.addEventListener('click', function () {
+                // TOGGLE THE VISIBILITY
+                mobileMenu.classList.toggle('hidden');
+
+                // TOGGLE THE ICON (Hamburger <-> X)
+                const icon = menuToggle.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+
+                // Optional: Prevent background scrolling when menu is open
+                document.body.classList.toggle('overflow-hidden');
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden'); // Re-enable scrolling
+
+                    const icon = menuToggle.querySelector('i');
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                });
+            });
+
+            // --- (Rest of the JavaScript functions for dropdown, scroll, and active links) ---
+            // I'm omitting the full code here for brevity, but the logic remains the same.
+            // If you compile the full page, ensure you use the complete script from the last response!
+
+            // ... (Code for Navbar Shrink, Active Link Tracking, Smooth Scrolling, and Dropdown Management)
+
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const navbar = document.getElementById('navbar');
+            const infoBar = document.getElementById('infoBar');
+            const navLinks = document.querySelectorAll('#desktopNavLinks .nav-item');
+            const sections = document.querySelectorAll('section');
+
+            // Dropdown elements
+            const dropdownParent = document.getElementById('moreDropdownParent');
+            const dropdownPanel = document.getElementById('moreDropdownPanel');
+            const moreIcon = document.querySelector('.more-icon');
+            let closeTimeout; // Variable to hold the timeout timer
+
+            // --- Dropdown Management Functions ---
+
+            const openDropdown = () => {
+                clearTimeout(closeTimeout);
+                dropdownPanel.classList.remove('hidden');
+                moreIcon.classList.add('rotate-180');
+            };
+
+            const closeDropdown = () => {
+                // Set a timeout before hiding, giving user time to move to the panel
+                closeTimeout = setTimeout(() => {
+                    dropdownPanel.classList.add('hidden');
+                    moreIcon.classList.remove('rotate-180');
+                }, 200); // 200 milliseconds delay
+            };
+
+            // Attach listeners to the parent element (More link)
+            dropdownParent.addEventListener('mouseenter', openDropdown);
+            dropdownParent.addEventListener('mouseleave', closeDropdown);
+
+            // Attach listeners to the panel itself to keep it open
+            dropdownPanel.addEventListener('mouseenter', openDropdown);
+            dropdownPanel.addEventListener('mouseleave', closeDropdown);
+
+
+            // --- Other Navigation Functions (Mobile Menu, Scroll, Active Links) ---
+
+            // Mobile Menu Toggle Functionality
+            menuToggle.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+                const icon = menuToggle.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    const icon = menuToggle.querySelector('i');
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                });
+            });
+
+            // Navbar Shrink and Sticky Effect on Scroll
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                    infoBar.style.display = 'none';
+                } else {
+                    navbar.classList.remove('scrolled');
+                    infoBar.style.display = 'block';
+                }
+            });
+
+            // Active Link Tracking (Intersection Observer)
+            function removeActiveClasses() {
+                navLinks.forEach(link => {
+                    link.classList.remove('active-link', 'text-blue-700');
+                    link.classList.add('hover:text-blue-700');
+                });
+            }
+
+            const observerOptions = { root: null, rootMargin: '0px 0px -50% 0px', threshold: 0.1 };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        removeActiveClasses();
+                        const id = entry.target.id;
+                        const activeLink = document.querySelector(`a[href="#${id}"]`);
+
+                        if (activeLink) {
+                            // Only apply active style to non-dropdown links for cleaner look
+                            if (!activeLink.closest('#moreDropdownPanel')) {
+                                activeLink.classList.add('active-link', 'text-blue-700');
+                                activeLink.classList.remove('hover:text-blue-700');
+                            }
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                // Add an ID of 'home' to your hero section if it doesn't have one
+                if (section.id) observer.observe(section);
+            });
+
+            // Smooth Scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    // Close the dropdown if an item inside was clicked
+                    if (this.closest('#moreDropdownPanel')) {
+                        dropdownPanel.classList.add('hidden');
+                        moreIcon.classList.remove('rotate-180');
+                    }
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+        });
+    </script>
+
+    <main>
+        <!-- Hero -->
+
+        <section id="hero" class="relative pt-24 min-h-screen flex items-center overflow-hidden">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+
+            <div id="heroSlider" class="relative w-full h-full min-h-[550px] flex items-center justify-center">
+                <div class="slide absolute inset-0 transition-opacity duration-700 opacity-100">
+                    <img src="https://images.pexels.com/photos/8460031/pexels-photo-8460031.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                        class="w-full h-full object-cover" alt="X-ray machine room" />
+
+                    <div class="absolute inset-0 gradient-overlay flex items-center">
+                        <div class="max-w-4xl mx-auto px-6 text-white z-10" data-aos="fade-up">
+                            <h2 class="text-4xl md:text-5xl font-extrabold leading-tight">
+                                Accurate & Fast X-Ray Imaging
+                            </h2>
+                            <p class="mt-3 md:mt-4 text-lg md:text-xl font-light">
+                                High-precision digital X-ray scans with instant reporting.
+                            </p>
+                            <a href="#book"
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 mt-6 inline-block rounded-lg font-semibold shadow-xl transition duration-300">
+                                Book Appointment
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                    <img src="https://images.pexels.com/photos/7089010/pexels-photo-7089010.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                        class="w-full h-full object-cover" alt="Doctor reviewing scan" />
+
+                    <div class="absolute inset-0 gradient-overlay flex items-center">
+                        <div class="max-w-4xl mx-auto px-6 text-white z-10" data-aos="fade-up">
+                            <h2 class="text-4xl md:text-5xl font-extrabold leading-tight">
+                                Safe & Reliable Diagnosis
+                            </h2>
+                            <p class="mt-3 md:mt-4 text-lg md:text-xl font-light">
+                                Modern equipment operated by experienced radiologists.
+                            </p>
+                            <a href="#book"
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 mt-6 inline-block rounded-lg font-semibold shadow-xl transition duration-300">
+                                Schedule Scan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="prevSlide()"
+                    class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/50 hover:bg-white text-gray-900 w-10 h-10 rounded-full flex items-center justify-center text-xl z-20 transition duration-300">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <button onclick="nextSlide()"
+                    class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/50 hover:bg-white text-gray-900 w-10 h-10 rounded-full flex items-center justify-center text-xl z-20 transition duration-300">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div id="slideProgress" class="absolute bottom-0 left-0 h-1 bg-blue-500 z-50 w-0"></div>
+        </section>
+
+        <!-- COUNTER SECTION -->
+        <section id="stats" class="py-16 bg-white">
+            <div class="container mx-auto px-6 max-w-7xl">
+                <h2 class="text-4xl font-extrabold text-center text-gray-800 mb-12" data-aos="fade-up">
+                    Our <span class="text-blue-600 reveal-underline">Key Achievements</span>
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+
+                    <div class="counter-item text-center p-6 bg-blue-50 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.03]"
+                        data-aos="zoom-in" data-aos-delay="100">
+                        <i class="fas fa-x-ray text-4xl text-blue-600 mb-3 float-animation"></i>
+                        <div class="text-5xl font-bold text-gray-900 counter" data-target="5500">0</div>
+                        <p class="text-lg font-medium text-gray-600 mt-1">Digital X-Rays</p>
+                    </div>
+
+                    <div class="counter-item text-center p-6 bg-green-50 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.03]"
+                        data-aos="zoom-in" data-aos-delay="200">
+                        <i class="fas fa-heart text-4xl text-green-600 mb-3 float-animation"></i>
+                        <div class="text-5xl font-bold text-gray-900 counter" data-target="8800">0</div>
+                        <p class="text-lg font-medium text-gray-600 mt-1">Happy Patients</p>
+                    </div>
+
+                    <div class="counter-item text-center p-6 bg-yellow-50 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.03]"
+                        data-aos="zoom-in" data-aos-delay="300">
+                        <i class="fas fa-calendar-check text-4xl text-yellow-600 mb-3 float-animation"></i>
+                        <div class="text-5xl font-bold text-gray-900 counter" data-target="10">0</div>
+                        <p class="text-lg font-medium text-gray-600 mt-1">Years of Service</p>
+                    </div>
+
+                    <div class="counter-item text-center p-6 bg-red-50 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.03]"
+                        data-aos="zoom-in" data-aos-delay="400">
+                        <i class="fas fa-user-md text-4xl text-red-600 mb-3 float-animation"></i>
+                        <div class="text-5xl font-bold text-gray-900 counter" data-target="15">0</div>
+                        <p class="text-lg font-medium text-gray-600 mt-1">Specialists</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- About SECTION -->
+        <section id="about" class="py-16 md:py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+
+                <h2 class="text-4xl font-extrabold text-center text-gray-800 mb-12" data-aos="fade-up">
+                    About <span class="text-blue-600 reveal-underline">Our Diagnostic Center</span>
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+                    <div class="relative py-10 md:py-0" data-aos="fade-right">
+
+                        <div
+                            class="absolute -top-1 -left-1 w-16 h-16 bg-blue-100 rounded-full float-lr opacity-70 hidden md:block z-10">
+                        </div>
+
+                        <div
+                            class="absolute bottom-10 right-0 w-12 h-12 bg-blue-400 rounded-full opacity-60 blur-md z-10">
+                        </div>
+
+                        <div class="rounded-xl overflow-hidden shadow-2xl relative z-20 border-4 border-gray-100">
+                            <img src="Image/about/image.png" alt="Digital X-Ray Scan"
+                                class="w-full h-auto object-cover transition duration-500 hover:scale-105 float-animation">
+                        </div>
+
+                        <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-2xl shadow-xl
+                    relative mx-auto
+                    max-w-xs 
+                    px-6 py-4 
+                    text-center
+                    mt-6
+                    z-30" data-aos="zoom-in" data-aos-delay="300">
+                            <h3 class="text-2xl font-extrabold leading-tight">10+ Years</h3>
+                            <p class="text-sm tracking-wider opacity-90 mt-1">Trusted Diagnostic Care</p>
+                        </div>
+
+                    </div>
+
+                    <div class="space-y-6" data-aos="fade-left" data-aos-delay="150">
+                        <h3 class="text-3xl font-bold text-gray-900 leading-snug">
+                            Dedicated to Accuracy, Driven by Compassion.
+                        </h3>
+
+                        <p class="text-gray-700 leading-relaxed text-lg">
+                            <strong>Abhang Diagnostic Center</strong> is a 10 years 2 months old Proprietorship Firm
+                            incorporated on <strong>23-Oct-2015</strong>, having its registered office located at
+                            <strong>Phaltan, Maharashtra</strong>.
+                        </p>
+
+                        <p class="mt-4 text-gray-600">
+                            The major activity of Abhang Diagnostic Center is Services, Sub-classified into Human health
+                            activities and is primarily engaged in the Hospital activities.
+                        </p>
+
+                        <p class="mt-4 text-gray-600">
+                            Abhang Diagnostic Center is classified as a <strong>Micro enterprise</strong> in the
+                            financial year 2024-25. It has its unit situated at Phaltan, Maharashtra.
+                        </p>
+
+                        <div class="mt-6 p-5 bg-blue-50 border-l-4 border-blue-600 rounded-r-lg shadow-sm"
+                            data-aos="fade-up" data-aos-delay="100">
+                            <h4 class="text-xl font-bold text-blue-800 mb-1">Lead Doctor</h4>
+                            <p class="text-gray-900 font-extrabold text-2xl">Dr. Pravin Abhang</p>
+                            <p class="text-gray-700 font-medium">Radiologist - MBBS, DMRD, DNB</p>
+                        </div>
+
+                        <div class="mt-8 grid grid-cols-2 gap-6">
+                            <div class="flex items-start space-x-3" data-aos="fade-up" data-aos-delay="200">
+                                <i class="fas fa-microscope text-xl text-blue-600 mt-1"></i>
+                                <p class="text-gray-800 font-medium">Digital X-Ray Machines</p>
+                            </div>
+
+                            <div class="flex items-start space-x-3" data-aos="fade-up" data-aos-delay="250">
+                                <i class="fas fa-user-tie text-xl text-blue-600 mt-1"></i>
+                                <p class="text-gray-800 font-medium">Experienced Radiologists</p>
+                            </div>
+
+                            <div class="flex items-start space-x-3" data-aos="fade-up" data-aos-delay="300">
+                                <i class="fas fa-stopwatch text-xl text-blue-600 mt-1"></i>
+                                <p class="text-gray-800 font-medium">Fast Report Delivery</p>
+                            </div>
+
+                            <div class="flex items-start space-x-3" data-aos="fade-up" data-aos-delay="350">
+                                <i class="fas fa-shield-alt text-xl text-blue-600 mt-1"></i>
+                                <p class="text-gray-800 font-medium">Affordable & Safe Scans</p>
+                            </div>
+                        </div>
+
+                        <a href="#appointment" data-aos="zoom-in" data-aos-delay="400"
+                            class="mt-8 inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold shadow-md transition duration-300">
+                            Book Your Scan <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="py-16 md:py-20 bg-gray-50 relative" id="services">
+            <div class="max-w-7xl mx-auto px-6 text-center">
+
+                <h2 class="text-4xl font-extrabold text-gray-800 mb-12" data-aos="fade-up">
+                    <span class="text-blue-600 reveal-underline">Imaging and Radiology</span>
+                </h2>
+
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="150">
+                    Advanced digital imaging services using modern technology for accurate and fast diagnosis.
+                </p>
+
+                <div
+                    class="absolute opacity-30 w-16 h-16 bg-blue-200 rounded-full float-animation hidden md:block left-0 top-1/4 -translate-x-1/2 z-0">
+                </div>
+                <div
+                    class="absolute opacity-30 w-12 h-12 bg-blue-100 rounded-full float-lr hidden md:block right-0 bottom-1/4 translate-x-1/2 z-0">
+                </div>
+
+
+                <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+
+                    <div class="p-8 glow-hover bg-white rounded-xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 hover:scale-[1.03] border hover:border-blue-200 relative z-10"
+                        data-aos="zoom-in" data-aos-delay="250">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2966/2966367.png"
+                            class="h-16 mb-4 mx-auto float-animation" alt="Special Procedure Icon">
+                        <h3 class="text-xl font-bold text-gray-800">Special Procedures</h3>
+                        <p class="text-blue-700 font-semibold mt-1">तज्ञ डॉक्टर प्रोसिजर व रेडिओलॉजिस्ट रिपोर्टिंग</p>
+                        <p class="mt-3 text-gray-600">
+                            Expert doctor procedures and specialist radiologist interpretation.
+                        </p>
+                    </div>
+
+                    <div class="p-8 glow-hover bg-white rounded-xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 hover:scale-[1.03] border hover:border-blue-200 relative z-10"
+                        data-aos="zoom-in" data-aos-delay="300">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2966/2966387.png"
+                            class="h-16 mb-4 mx-auto float-lr" alt="Mobile X-Ray Icon">
+                        <h3 class="text-xl font-bold text-gray-800">Home / Hospital X-Ray</h3>
+                        <p class="text-blue-700 font-semibold mt-1">हॉस्पिटल / घरी एक्स-रे सुविधा</p>
+                        <p class="mt-3 text-gray-600">
+                            Mobile X-ray services available at home or hospital bedside.
+                        </p>
+                    </div>
+
+                    <div class="p-8 glow-hover bg-white rounded-xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 hover:scale-[1.03] border hover:border-blue-200 relative z-10"
+                        data-aos="zoom-in" data-aos-delay="350">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2966/2966374.png"
+                            class="h-16 mb-4 mx-auto float-animation" alt="24/7 Icon">
+                        <h3 class="text-xl font-bold text-gray-800">24×7 Availability</h3>
+                        <p class="text-blue-700 font-semibold mt-1">२४ तास एक्स-रे सेवा</p>
+                        <p class="mt-3 text-gray-600">
+                            Emergency digital imaging available anytime, day or night.
+                        </p>
+                    </div>
+
+                    <div class="p-8 glow-hover bg-white rounded-xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 hover:scale-[1.03] border hover:border-blue-200 relative z-10"
+                        data-aos="zoom-in" data-aos-delay="400">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2966/2966316.png"
+                            class="h-16 mb-4 mx-auto float-lr" alt="Quality Icon">
+                        <h3 class="text-xl font-bold text-gray-800">Quality & Precision</h3>
+                        <p class="text-blue-700 font-semibold mt-1">उच्च गुणवत्ता • अचूकता • विश्वास</p>
+                        <p class="mt-3 text-gray-600">
+                            Precision, Accuracy, Expert interpretation, Timely reports, Affordable for all.
+                        </p>
+                    </div>
+
+                    <!-- New Ultrasound Item -->
+                    <div class="p-8 glow-hover bg-white rounded-xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 hover:scale-[1.03] border hover:border-blue-200 relative z-10"
+                        data-aos="zoom-in" data-aos-delay="450">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2966/2966456.png"
+                            class="h-16 mb-4 mx-auto float-animation" alt="Ultrasound Icon">
+                        <h3 class="text-xl font-bold text-gray-800">Diagnostic Ultrasound</h3>
+                        <p class="text-blue-700 font-semibold mt-1">High-Definition Imaging</p>
+                        <p class="mt-3 text-gray-600">
+                            Advanced ultrasound technology for precise diagnosis.
+                        </p>
+                    </div>
+
+                    <div class="p-8 glow-hover bg-white rounded-xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 hover:scale-[1.03] border hover:border-blue-200 relative z-10"
+                        data-aos="zoom-in" data-aos-delay="500">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2966/2966456.png"
+                            class="h-16 mb-4 mx-auto float-animation" alt="Ultrasound Icon">
+                        <h3 class="text-xl font-bold text-gray-800">2D and 3D Sonography</h3>
+                        <p class="text-blue-700 font-semibold mt-1">Detailed Fetal & Organ Imaging</p>
+                        <p class="mt-3 text-gray-600">
+                            Comprehensive 2D and 3D sonography services.
+                        </p>
+                    </div>
+
+                    <div class="p-8 glow-hover bg-white rounded-xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 hover:scale-[1.03] border hover:border-blue-200 relative z-10"
+                        data-aos="zoom-in" data-aos-delay="550">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png"
+                            class="h-16 mb-4 mx-auto float-animation" alt="X-Ray Icon">
+                        <h3 class="text-xl font-bold text-gray-800">X-Ray Services</h3>
+                        <p class="text-blue-700 font-semibold mt-1">Digital & High Precision</p>
+                        <p class="mt-3 text-gray-600">
+                            Fast and accurate X-Ray imaging for all body parts.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- LAB TESTS & PRICING SECTION -->
+        <section id="pathology-pricing" class="py-16 md:py-20 bg-blue-50 relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                    <h2 class="text-4xl font-extrabold text-gray-800">
+                        <span class="text-blue-600 reveal-underline">Diagnostic And Pathology</span>
+                    </h2>
+                    <p class="mt-4 text-gray-600" data-aos="fade-up" data-aos-delay="150">
+                        Accurate blood, urine, and stool analysis with quick reporting.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Test Items -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500 hover:scale-105 transition transform duration-300"
+                        data-aos="zoom-in">
+                        <h3 class="text-xl font-bold text-gray-800">CBC Test</h3>
+                        <p class="text-gray-600 mt-2">Complete Blood Count</p>
+                        <div class="mt-4 text-blue-700 font-bold text-lg">Starting from ₹200</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500 hover:scale-105 transition transform duration-300"
+                        data-aos="zoom-in" data-aos-delay="100">
+                        <h3 class="text-xl font-bold text-gray-800">Thyroid Profile</h3>
+                        <p class="text-gray-600 mt-2">T3, T4, TSH Analysis</p>
+                        <div class="mt-4 text-blue-700 font-bold text-lg">Starting from ₹400</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500 hover:scale-105 transition transform duration-300"
+                        data-aos="zoom-in" data-aos-delay="200">
+                        <h3 class="text-xl font-bold text-gray-800">Malaria Test</h3>
+                        <p class="text-gray-600 mt-2">Rapid Antigen / Smear</p>
+                        <div class="mt-4 text-blue-700 font-bold text-lg">Starting from ₹200</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500 hover:scale-105 transition transform duration-300"
+                        data-aos="zoom-in" data-aos-delay="300">
+                        <h3 class="text-xl font-bold text-gray-800">C Reactive Protein (CRP)</h3>
+                        <p class="text-gray-600 mt-2">Inflammation Marker</p>
+                        <div class="mt-4 text-blue-700 font-bold text-lg">Starting from ₹300</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500 hover:scale-105 transition transform duration-300"
+                        data-aos="zoom-in" data-aos-delay="400">
+                        <h3 class="text-xl font-bold text-gray-800">Urine/Stool Analysis</h3>
+                        <p class="text-gray-600 mt-2">Culture & Routine Microscopic</p>
+                        <div class="mt-4 text-blue-700 font-bold text-lg">₹150 - ₹500</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500 hover:scale-105 transition transform duration-300"
+                        data-aos="zoom-in" data-aos-delay="500">
+                        <h3 class="text-xl font-bold text-gray-800">COVID-19 Testing</h3>
+                        <p class="text-gray-600 mt-2">RT-PCR / Rapid & Safety Protocols</p>
+                        <div class="mt-4 text-blue-700 font-bold text-lg">Available</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="why-choose-us" class="py-16 md:py-20 bg-white relative">
+            <div class="max-w-7xl mx-auto px-6 text-center">
+
+                <h2 class="text-4xl font-extrabold text-gray-800 mb-12" data-aos="fade-up">
+                    Why <span class="text-blue-600 reveal-underline">Choose Us</span>
+                </h2>
+
+                <p class="mt-4 text-gray-600 max-w-3xl mx-auto mb-16" data-aos="fade-up" data-aos-delay="150">
+                    We combine state-of-the-art digital technology with a patient-centric approach to ensure you receive
+                    the best diagnostic experience possible.
+                </p>
+
+                <div
+                    class="absolute opacity-30 w-16 h-16 bg-blue-200 rounded-full float-lr hidden md:block right-10 top-1/4 translate-x-1/2 z-0">
+                </div>
+                <div
+                    class="absolute opacity-30 w-12 h-12 bg-blue-100 rounded-full float-animation hidden md:block left-1/4 bottom-1/4 -translate-y-1/2 z-0">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mt-8">
+
+                    <div class="p-8 bg-gray-50 rounded-xl text-center shadow-md hover:shadow-2xl transition 
+                hover:-translate-y-2 hover:scale-[1.04] border border-transparent 
+                hover:border-blue-200 relative z-10" data-aos="zoom-in" data-aos-delay="150">
+
+                        <img src="https://cdn-icons-png.flaticon.com/512/2965/2965874.png"
+                            class="h-16 mx-auto mb-4 float-animation" alt="Accurate Reports Icon">
+
+                        <h3 class="text-xl font-semibold text-gray-800">Accurate Reports</h3>
+                        <p class="text-gray-600 mt-2">
+                            High-precision digital imaging ensures clear, reliable diagnostic results.
+                        </p>
+                    </div>
+
+                    <div class="p-8 bg-gray-50 rounded-xl text-center shadow-md hover:shadow-2xl transition
+                hover:-translate-y-2 hover:scale-[1.04] border border-transparent
+                hover:border-blue-200 relative z-10" data-aos="zoom-in" data-aos-delay="250">
+
+                        <img src="https://cdn-icons-png.flaticon.com/512/3004/3004458.png"
+                            class="h-16 mx-auto mb-4 float-lr" alt="Experienced Radiologists Icon">
+
+                        <h3 class="text-xl font-semibold text-gray-800">Expert Radiologists</h3>
+                        <p class="text-gray-600 mt-2">
+                            Scans reviewed by trained, certified radiology experts.
+                        </p>
+                    </div>
+
+                    <div class="p-8 bg-gray-50 rounded-xl text-center shadow-md hover:shadow-2xl transition
+                hover:-translate-y-2 hover:scale-[1.04] border border-transparent
+                hover:border-blue-200 relative z-10" data-aos="zoom-in" data-aos-delay="350">
+
+                        <img src="https://cdn-icons-png.flaticon.com/512/9925/9925453.png"
+                            class="h-16 mx-auto mb-4 float-animation" alt="Fast Report Delivery Icon">
+
+                        <h3 class="text-xl font-semibold text-gray-800">Quick Turnaround Time</h3>
+                        <p class="text-gray-600 mt-2">
+                            Quick digital reporting with no long waiting times.
+                        </p>
+                    </div>
+
+                    <div class="p-8 bg-gray-50 rounded-xl text-center shadow-md hover:shadow-2xl transition
+                hover:-translate-y-2 hover:scale-[1.04] border border-transparent
+                hover:border-blue-200 relative z-10" data-aos="zoom-in" data-aos-delay="450">
+
+                        <img src="https://cdn-icons-png.flaticon.com/512/2913/2913465.png"
+                            class="h-16 mx-auto mb-4 float-lr" alt="Affordable Pricing Icon">
+
+                        <h3 class="text-xl font-semibold text-gray-800">Affordable Pricing</h3>
+                        <p class="text-gray-600 mt-2">
+                            High-quality diagnostics at budget-friendly rates.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+
+        <!-- DETAILED SERVICES CHECKLIST SECTION -->
+        <section id="detailed-services" class="py-16 md:py-24 bg-gray-50 relative">
+            <div class="max-w-7xl mx-auto px-6">
+
+                <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                    <h2 class="text-4xl font-extrabold text-gray-800">
+                        Detailed <span class="text-blue-600 reveal-underline">Diagnostic Checklist</span>
+                    </h2>
+                    <p class="mt-4 text-gray-600 text-lg" data-aos="fade-up" data-aos-delay="150">
+                        Advanced technology meets expert care. Complete range of diagnostic scans available.
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+
+                    <!-- Sonography Card -->
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 group"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div class="p-6 bg-gradient-to-r from-blue-600 to-blue-800 text-white relative overflow-hidden">
+                            <div
+                                class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white opacity-10 rounded-full blur-xl group-hover:scale-150 transition duration-700">
+                            </div>
+                            <h3 class="text-2xl font-bold flex items-center relative z-10">
+                                <i class="fas fa-wave-square mr-3 bg-white/20 p-2 rounded-lg"></i> Sonography
+                            </h3>
+                        </div>
+                        <div class="p-6">
+                            <ul class="grid grid-cols-1 gap-y-3 text-gray-700 font-medium">
+                                <li class="flex items-center"><span
+                                        class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Abdomen & Pelvis</li>
+                                <li class="flex items-center"><span
+                                        class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Ovulation Study</li>
+                                <li class="flex items-center"><span
+                                        class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Thyroid / Neck</li>
+                                <li class="flex items-center"><span
+                                        class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Breast</li>
+                                <li class="flex items-center"><span
+                                        class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Scrotum / Scrotal Doppler
+                                </li>
+                                <li class="flex items-center"><span
+                                        class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Transrectal Ultrasound
+                                    (TRUS)</li>
+                                <li class="flex items-center"><span
+                                        class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> FETAL 2D ECHO</li>
+                                <li class="flex items-center"><span
+                                        class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Anomaly Scan</li>
+                                <li class="flex items-center"><span
+                                        class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Obstetric Scan</li>
+                                <li class="flex items-center"><span
+                                        class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> NT Scan (11.5 to 13.5)
+                                </li>
+                                <li class="flex items-center"><span
+                                        class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> 3D/4D Scan</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Color Doppler Card -->
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 group"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <div
+                            class="p-6 bg-gradient-to-r from-purple-600 to-purple-800 text-white relative overflow-hidden">
+                            <div
+                                class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white opacity-10 rounded-full blur-xl group-hover:scale-150 transition duration-700">
+                            </div>
+                            <h3 class="text-2xl font-bold flex items-center relative z-10">
+                                <i class="fas fa-heartbeat mr-3 bg-white/20 p-2 rounded-lg"></i> Color Doppler
+                            </h3>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-4 text-gray-700 font-medium">
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-purple-500 rounded-full mr-3 mt-2"></span>
+                                    <span>Arterial - Upper Limb <br><span
+                                            class="text-xs text-gray-500 font-normal">(Right/Left/Both)</span></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-purple-500 rounded-full mr-3 mt-2"></span>
+                                    <span>Venous System - Upper Limb <br><span
+                                            class="text-xs text-gray-500 font-normal">(Right/Left/Both)</span></span>
+                                </li>
+                                <li class="flex items-center"><span
+                                        class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span> Carotid Doppler</li>
+                                <li class="flex items-center"><span
+                                        class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span> Portovenous Doppler</li>
+                                <li class="flex items-center"><span
+                                        class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span> Renal Doppler</li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-purple-500 rounded-full mr-3 mt-2"></span>
+                                    <span>Lower Limb <br><span
+                                            class="text-xs text-gray-500 font-normal">(Right/Left/Both)</span></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Digital X-Ray Card -->
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 group"
+                        data-aos="fade-up" data-aos-delay="300">
+                        <div
+                            class="p-6 bg-gradient-to-r from-green-600 to-green-800 text-white relative overflow-hidden">
+                            <div
+                                class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white opacity-10 rounded-full blur-xl group-hover:scale-150 transition duration-700">
+                            </div>
+                            <h3 class="text-2xl font-bold flex items-center relative z-10">
+                                <i class="fas fa-x-ray mr-3 bg-white/20 p-2 rounded-lg"></i> Digital X-Ray
+                            </h3>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-6 text-gray-700 font-medium">
+                                <li class="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-bone text-green-600 mr-2"></i> <strong>General X-Rays</strong>
+                                    </div>
+                                    <p class="text-sm text-gray-600 pl-6 mb-1">Chest / Abdomen / KUB / PNS</p>
+                                    <p class="text-sm text-gray-600 pl-6">Orbit / Skull</p>
+                                    <span
+                                        class="inline-block mt-2 ml-6 text-xs bg-green-200 text-green-800 px-2 py-1 rounded">AP
+                                        & LAT Views</span>
+                                </li>
+                                <li class="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-notes-medical text-green-600 mr-2"></i> <strong>Spine
+                                            X-Rays</strong>
+                                    </div>
+                                    <p class="text-sm text-gray-600 pl-6 mb-1">Cervical Spine</p>
+                                    <p class="text-sm text-gray-600 pl-6">Thoraco-Lumber / Lumbosacral</p>
+                                    <span
+                                        class="inline-block mt-2 ml-6 text-xs bg-green-200 text-green-800 px-2 py-1 rounded">AP
+                                        & LAT Views</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section id="gallery" class="py-16 md:py-24 bg-white relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center max-w-4xl mx-auto mb-16" data-aos="fade-up">
+                    <h2 class="text-4xl font-extrabold text-gray-800">
+                        Hospital <span class="text-blue-600 reveal-underline">Image Gallery</span>
+                    </h2>
+                    <p class="mt-4 text-gray-600" data-aos="fade-up" data-aos-delay="150">
+                        Explore our advanced facilities and diagnostic center.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Image 1 -->
+                    <div class="overflow-hidden rounded-lg shadow-lg cursor-pointer group" data-aos="zoom-in"
+                        onclick="openModal('image/new/1.jpg')">
+                        <img src="image/new/1.jpg" alt="Gallery Image 1"
+                            class="w-full h-48 object-cover transition duration-500 transform group-hover:scale-110">
+                    </div>
+                    <!-- Image 2 -->
+                    <div class="overflow-hidden rounded-lg shadow-lg cursor-pointer group" data-aos="zoom-in"
+                        data-aos-delay="100" onclick="openModal('image/new/2.jpg')">
+                        <img src="image/new/2.jpg" alt="Gallery Image 2"
+                            class="w-full h-48 object-cover transition duration-500 transform group-hover:scale-110">
+                    </div>
+                    <!-- Image 3 -->
+                    <div class="overflow-hidden rounded-lg shadow-lg cursor-pointer group" data-aos="zoom-in"
+                        data-aos-delay="150" onclick="openModal('image/new/3.jpg')">
+                        <img src="image/new/3.jpg" alt="Gallery Image 3"
+                            class="w-full h-48 object-cover transition duration-500 transform group-hover:scale-110">
+                    </div>
+                    <!-- Image 4 -->
+                    <div class="overflow-hidden rounded-lg shadow-lg cursor-pointer group" data-aos="zoom-in"
+                        data-aos-delay="200" onclick="openModal('image/new/4.jpg')">
+                        <img src="image/new/4.jpg" alt="Gallery Image 4"
+                            class="w-full h-48 object-cover transition duration-500 transform group-hover:scale-110">
+                    </div>
+                    <!-- Image 5 -->
+                    <div class="overflow-hidden rounded-lg shadow-lg cursor-pointer group" data-aos="zoom-in"
+                        data-aos-delay="250" onclick="openModal('image/new/5.jpg')">
+                        <img src="image/new/5.jpg" alt="Gallery Image 5"
+                            class="w-full h-48 object-cover transition duration-500 transform group-hover:scale-110">
+                    </div>
+                    <!-- Image 6 -->
+                    <div class="overflow-hidden rounded-lg shadow-lg cursor-pointer group" data-aos="zoom-in"
+                        data-aos-delay="300" onclick="openModal('image/new/6.jpg')">
+                        <img src="image/new/6.jpg" alt="Gallery Image 6"
+                            class="w-full h-48 object-cover transition duration-500 transform group-hover:scale-110">
+                    </div>
+                    <!-- Image 7 -->
+                    <div class="overflow-hidden rounded-lg shadow-lg cursor-pointer group" data-aos="zoom-in"
+                        data-aos-delay="350" onclick="openModal('image/new/7.jpg')">
+                        <img src="image/new/7.jpg" alt="Gallery Image 7"
+                            class="w-full h-48 object-cover transition duration-500 transform group-hover:scale-110">
+                    </div>
+                    <!-- Image 8 -->
+                    <div class="overflow-hidden rounded-lg shadow-lg cursor-pointer group" data-aos="zoom-in"
+                        data-aos-delay="400" onclick="openModal('image/new/8.jpg')">
+                        <img src="image/new/8.jpg" alt="Gallery Image 8"
+                            class="w-full h-48 object-cover transition duration-500 transform group-hover:scale-110">
+                    </div>
+                    <!-- Image 9 -->
+                    <div class="overflow-hidden rounded-lg shadow-lg cursor-pointer group" data-aos="zoom-in"
+                        data-aos-delay="450" onclick="openModal('image/new/9.jpg')">
+                        <img src="image/new/9.jpg" alt="Gallery Image 9"
+                            class="w-full h-48 object-cover transition duration-500 transform group-hover:scale-110">
+                    </div>
+                    <!-- Image 10 -->
+                    <div class="overflow-hidden rounded-lg shadow-lg cursor-pointer group" data-aos="zoom-in"
+                        data-aos-delay="500" onclick="openModal('image/new/10.jpg')">
+                        <img src="image/new/10.jpg" alt="Gallery Image 10"
+                            class="w-full h-48 object-cover transition duration-500 transform group-hover:scale-110">
+                    </div>
+                    <!-- Image 11 -->
+                    <div class="overflow-hidden rounded-lg shadow-lg cursor-pointer group" data-aos="zoom-in"
+                        data-aos-delay="500" onclick="openModal('image/new/11.jpg')">
+                        <img src="image/new/11.jpg" alt="Gallery Image 11"
+                            class="w-full h-48 object-cover transition duration-500 transform group-hover:scale-110">
+                    </div>
+                    <!-- Image 12 -->
+                    <div class="overflow-hidden rounded-lg shadow-lg cursor-pointer group" data-aos="zoom-in"
+                        data-aos-delay="500" onclick="openModal('image/new/12.jpg')">
+                        <img src="image/new/12.jpg" alt="Gallery Image 12"
+                            class="w-full h-48 object-cover transition duration-500 transform group-hover:scale-110">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image Modal -->
+            <div id="imageModal"
+                class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4"
+                onclick="closeModal()">
+                <div class="relative">
+                    <img id="modalImage" src="" alt="Zoomed Image"
+                        class="max-w-full max-h-[95vh] rounded-lg shadow-2xl transition-transform duration-700 transform scale-90 opacity-0 bg-white object-contain">
+                </div>
+            </div>
+
+            <script>
+                function openModal(imageSrc) {
+                    const modal = document.getElementById('imageModal');
+                    const modalImg = document.getElementById('modalImage');
+
+                    modal.classList.remove('hidden');
+                    modalImg.src = imageSrc;
+
+                    // Small delay to allow display:block to apply before transition
+                    setTimeout(() => {
+                        modalImg.classList.remove('scale-90', 'opacity-0');
+                        modalImg.classList.add('scale-100', 'opacity-100');
+                    }, 50);
+                }
+
+                function closeModal() {
+                    const modal = document.getElementById('imageModal');
+                    const modalImg = document.getElementById('modalImage');
+
+                    modalImg.classList.remove('scale-100', 'opacity-100');
+                    modalImg.classList.add('scale-90', 'opacity-0');
+
+                    setTimeout(() => {
+                        modal.classList.add('hidden');
+                        modalImg.src = '';
+                    }, 500); // Wait for transition to finish
+                }
+            </script>
+        </section>
+
+        <section id="accreditations" class="py-16 md:py-24 bg-white relative">
+            <div class="max-w-7xl mx-auto px-6">
+
+                <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                    <h2 class="text-4xl font-extrabold text-gray-800">
+                        Our Standard of <span class="text-blue-600 reveal-underline">Certificates</span>
+                    </h2>
+                    <p class="mt-4 text-gray-600" data-aos="fade-up" data-aos-delay="150">
+                        We proudly maintain affiliations and accreditations that guarantee reliable results and
+                        world-class safety protocols.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                    <div class="p-8 bg-gray-50 rounded-2xl shadow-lg border-t-8 border-blue-600 transition duration-300 transform hover:-translate-y-1 hover:shadow-2xl group"
+                        data-aos="zoom-in" data-aos-delay="200">
+                        <div class="flex items-center justify-center mb-6">
+                            <div
+                                class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center border-2 border-blue-600">
+                                <i class="fas fa-certificate text-3xl text-blue-600"></i>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-extrabold text-gray-900 mb-2">NABL Certified Lab</h3>
+                        <p class="text-sm text-gray-600">
+                            Highest national standard for quality and technical competence in medical testing.
+                        </p>
+                    </div>
+
+                    <div class="p-8 bg-gray-50 rounded-2xl shadow-lg border-t-8 border-green-600 transition duration-300 transform hover:-translate-y-1 hover:shadow-2xl group"
+                        data-aos="zoom-in" data-aos-delay="300">
+                        <div class="flex items-center justify-center mb-6">
+                            <div
+                                class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center border-2 border-green-600">
+                                <i class="fas fa-clipboard-check text-3xl text-green-600"></i>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-extrabold text-gray-900 mb-2">ISO 9001:2015</h3>
+                        <p class="text-sm text-gray-600">
+                            Certified for robust quality management systems and operational efficiency.
+                        </p>
+                    </div>
+
+                    <div class="p-8 bg-gray-50 rounded-2xl shadow-lg border-t-8 border-red-600 transition duration-300 transform hover:-translate-y-1 hover:shadow-2xl group"
+                        data-aos="zoom-in" data-aos-delay="400">
+                        <div class="flex items-center justify-center mb-6">
+                            <div
+                                class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center border-2 border-red-600">
+                                <i class="fas fa-handshake text-3xl text-red-600"></i>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-extrabold text-gray-900 mb-2">Govt. Empaneled</h3>
+                        <p class="text-sm text-gray-600">
+                            Approved partner for various state and national health schemes and programs.
+                        </p>
+                    </div>
+
+                    <div class="p-8 bg-gray-50 rounded-2xl shadow-lg border-t-8 border-yellow-600 transition duration-300 transform hover:-translate-y-1 hover:shadow-2xl group"
+                        data-aos="zoom-in" data-aos-delay="500">
+                        <div class="flex items-center justify-center mb-6">
+                            <div
+                                class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center border-2 border-yellow-600">
+                                <i class="fas fa-hospital-alt text-3xl text-yellow-600"></i>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-extrabold text-gray-900 mb-2">Regional Affiliations</h3>
+                        <p class="text-sm text-gray-600">
+                            Strong partnerships with leading local hospitals and medical centers for seamless referrals.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="mt-16 text-center max-w-4xl mx-auto p-6 bg-blue-50/50 rounded-xl" data-aos="fade-up"
+                    data-aos-delay="600">
+                    <p class="text-xl font-semibold text-gray-700">
+                        Trust is built on quality. We ensure <span class="text-blue-600 font-extrabold">trustworthy
+                            results every time</span> by adhering to global best practices.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section id="procedures" class="py-16 md:py-20 bg-white relative">
+            <div class="max-w-7xl mx-auto px-6">
+
+                <div class="text-center max-w-3xl mx-auto mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl font-extrabold text-gray-800">
+                        Our <span class="text-blue-600 reveal-underline">Diagnostic Center Services</span>
+                    </h2>
+                    <p class="mt-4 text-gray-600" data-aos="fade-up" data-aos-delay="150">
+                        Comprehensive diagnostic services for your health and well-being.
+                    </p>
+                </div>
+
+                <div
+                    class="absolute opacity-30 w-16 h-16 bg-blue-200 rounded-full float-animation hidden md:block left-1/4 top-1/4 -translate-x-1/2 z-0">
+                </div>
+                <div
+                    class="absolute opacity-30 w-12 h-12 bg-blue-100 rounded-full float-lr hidden md:block right-0 bottom-1/4 translate-x-1/2 z-0">
+                </div>
+
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
+
+                    <div class="bg-gray-50 rounded-xl shadow-xl hover:shadow-2xl transition border border-transparent hover:border-blue-300 p-4 relative z-10"
+                        data-aos="zoom-in" data-aos-delay="100">
+                        <img src="image/service/1.jpg" alt="Digital X-Ray"
+                            class="w-full h-74 object-cover rounded-lg hover:scale-105 transition duration-700 float-animation">
+                        <h3 class="text-xl font-bold text-blue-700 mt-4">Digital X-Ray</h3>
+                        <p class="text-gray-600 mt-2 text-sm leading-relaxed">
+                            High-resolution digital X-Rays for accurate bone and tissue diagnosis with minimal radiation
+                            exposure.
+                        </p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl shadow-xl hover:shadow-2xl transition border border-transparent hover:border-blue-300 p-4 relative z-10"
+                        data-aos="zoom-in" data-aos-delay="200">
+                        <img src="image/service/2.jpg" alt="Pathology Laboratory"
+                            class="w-full h-74 object-cover rounded-lg hover:scale-105 transition duration-700 float-lr">
+                        <h3 class="text-xl font-bold text-blue-700 mt-4">Pathology Laboratory</h3>
+                        <p class="text-gray-600 mt-2 text-sm leading-relaxed">
+                            Advanced lab for blood, urine, and stool testing with precise and timely reports.
+                        </p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl shadow-xl hover:shadow-2xl transition border border-transparent hover:border-blue-300 p-4 relative z-10"
+                        data-aos="zoom-in" data-aos-delay="300">
+                        <img src="image/service/3.jpg" alt="Ultrasonography"
+                            class="w-full h-74 object-cover rounded-lg hover:scale-105 transition duration-700 float-animation">
+                        <h3 class="text-xl font-bold text-blue-700 mt-4">Ultrasonography (USG)</h3>
+                        <p class="text-gray-600 mt-2 text-sm leading-relaxed">
+                            2D/3D Scans and Colour Doppler services for abdominal, pelvic, and pregnancy monitoring.
+                        </p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl shadow-xl hover:shadow-2xl transition border border-transparent hover:border-blue-300 p-4 relative z-10"
+                        data-aos="zoom-in" data-aos-delay="400">
+                        <img src="image/service/4.jpg" alt="Health Checkups"
+                            class="w-full h-74 object-cover rounded-lg hover:scale-105 transition duration-700 float-lr">
+                        <h3 class="text-xl font-bold text-blue-700 mt-4">Preventive Health Checkups</h3>
+                        <p class="text-gray-600 mt-2 text-sm leading-relaxed">
+                            Comprehensive health packages to monitor overall well-being and detect issues early.
+                        </p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl shadow-xl hover:shadow-2xl transition border border-transparent hover:border-blue-300 p-4 relative z-10"
+                        data-aos="zoom-in" data-aos-delay="500">
+                        <img src="image/service/5.jpg" alt="Cardiology Services"
+                            class="w-full h-74 object-cover rounded-lg hover:scale-105 transition duration-700 float-animation">
+                        <h3 class="text-xl font-bold text-blue-700 mt-4">ECG Services</h3>
+                        <p class="text-gray-600 mt-2 text-sm leading-relaxed">
+                            Electrocardiogram (ECG) testing for accurate heart health assessment.
+                        </p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl shadow-xl hover:shadow-2xl transition border border-transparent hover:border-blue-300 p-4 relative z-10"
+                        data-aos="zoom-in" data-aos-delay="600">
+                        <img src="image/service/6.jpg" alt="Home Collection"
+                            class="w-full h-74 object-cover rounded-lg hover:scale-105 transition duration-700 float-lr">
+                        <h3 class="text-xl font-bold text-blue-700 mt-4">Home Visit Services</h3>
+                        <p class="text-gray-600 mt-2 text-sm leading-relaxed">
+                            Blood sample collection and portable X-Ray services available at your doorstep.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section class="relative bg-blue-700 overflow-hidden py-24 md:py-36" id="hero-banner">
+
+            <div class="absolute inset-0 opacity-10 bg-cover bg-center"
+                style="background-image: url('img/medical-pattern.png');">
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
+
+                <h1 class="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-4" data-aos="fade-down">
+                    Precision <span class="text-blue-200">Diagnostics,</span> Trusted Results.
+                </h1>
+
+                <p class="text-xl text-blue-100 max-w-4xl mx-auto mb-8" data-aos="fade-down" data-aos-delay="150">
+                    Advanced Digital X-Ray & Radiology Services for accurate and timely health assessments.
+                </p>
+
+                <a href="#appointment" data-aos="zoom-in" data-aos-delay="300" class="inline-block bg-white text-blue-600 hover:bg-gray-100 px-10 py-4 
+                   rounded-full font-bold text-lg shadow-2xl transition duration-300 transform hover:scale-105">
+                    Book Appointment Now <i class="fas fa-calendar-check ml-2"></i>
+                </a>
+
+            </div>
+        </section>
+
+
+
+        <section id="appointment" class="py-16 md:py-20 bg-gray-50 relative">
+            <div class="max-w-7xl mx-auto px-6">
+
+                <div
+                    class="absolute opacity-30 w-16 h-16 bg-blue-200 rounded-full float-lr hidden md:block left-0 top-1/4 -translate-x-1/2 z-0">
+                </div>
+                <div
+                    class="absolute opacity-30 w-12 h-12 bg-blue-100 rounded-full float-animation hidden md:block right-0 bottom-1/4 translate-x-1/2 z-0">
+                </div>
+
+                <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+
+                    <div data-aos="fade-right" data-aos-delay="200" class="relative">
+                        <img src="https://images.pexels.com/photos/6129682/pexels-photo-6129682.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                            alt="Appointment" class="rounded-2xl shadow-2xl w-full h-auto object-cover float-animation">
+
+                        <div
+                            class="absolute inset-0 rounded-2xl border-4 border-blue-500 opacity-30 animate-pulse pointer-events-none">
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 md:p-10 rounded-2xl shadow-xl" data-aos="fade-left" data-aos-delay="300">
+
+                        <h2 class="text-4xl font-extrabold text-gray-800">
+                            Book Your <span class="text-blue-600 reveal-underline">Appointment</span>
+                        </h2>
+                        <p class="text-gray-600 mt-2">
+                            Fill the form below — our team will contact you shortly to confirm your slot.
+                        </p>
+
+                        <form class="mt-8 space-y-6">
+
+                            <div data-aos="fade-up" data-aos-delay="150">
+                                <label class="block text-gray-700 font-medium mb-1">Full Name</label>
+                                <input type="text" placeholder="Enter your name" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                            </div>
+
+                            <div data-aos="fade-up" data-aos-delay="200">
+                                <label class="block text-gray-700 font-medium mb-1">Mobile Number</label>
+                                <input type="tel" placeholder="Enter your phone number" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                            </div>
+
+                            <div data-aos="fade-up" data-aos-delay="250">
+                                <label class="block text-gray-700 font-medium mb-1">Select Service</label>
+                                <select required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none transition bg-white">
+                                    <option value="">-- Select Diagnostic Service --</option>
+                                    <option value="digital_xray">Digital X-Ray</option>
+                                    <option value="hsg">HSG (Hysterosalpingography)</option>
+                                    <option value="mcu">MCU (Cystourethrogram)</option>
+                                    <option value="ivp">IVP (Intravenous Pyelogram)</option>
+                                    <option value="fistulogram">Fistulogram</option>
+                                    <option value="barium">Barium Studies</option>
+                                    <option value="other">Other Special Procedure</option>
+                                </select>
+                            </div>
+
+                            <div data-aos="fade-up" data-aos-delay="300">
+                                <label class="block text-gray-700 font-medium mb-1">Preferred Date</label>
+                                <input type="date" required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                            </div>
+
+                            <div data-aos="zoom-in" data-aos-delay="350">
+                                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800
+                                text-white py-3 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl
+                                transition transform hover:-translate-y-1">
+                                    Confirm Appointment Request
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section id="faq" class="py-16 md:py-20 bg-white relative">
+            <div class="max-w-7xl mx-auto px-6">
+
+                <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                    <h2 class="text-4xl font-extrabold text-gray-800">
+                        Frequently Asked <span class="text-blue-600 reveal-underline">Questions</span>
+                    </h2>
+                    <p class="mt-4 text-gray-600" data-aos="fade-up" data-aos-delay="150">
+                        Find answers to the most common questions about our services and procedures.
+                    </p>
+                </div>
+
+                <div
+                    class="absolute opacity-30 w-16 h-16 bg-blue-200 rounded-full float-animation hidden md:block right-10 top-1/2 -translate-y-1/2 z-0">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+
+
+                    <div class="space-y-5 bg-gray-50 p-6 rounded-xl shadow-xl border-t-4 border-blue-600"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-2xl font-bold text-blue-700 flex items-center">
+                            <i class="fas fa-crosshairs mr-3"></i> Digital X-Ray
+                        </h3>
+
+                        <div class="faq-box bg-white p-4 rounded-lg shadow cursor-pointer transition hover:shadow-md"
+                            onclick="toggleFaq(this)">
+                            <div class="flex justify-between items-center">
+                                <p class="font-semibold text-gray-800">Is Digital X-Ray safe?</p>
+                                <span
+                                    class="faq-icon text-2xl text-blue-600 ml-4 transition duration-300 transform">+</span>
+                            </div>
+                            <div class="faq-content hidden mt-2 text-gray-600 text-sm border-t border-gray-100 pt-2">
+                                Yes, our digital X-Ray machines use extremely low radiation and are completely safe.
+                            </div>
+                        </div>
+
+                        <div class="faq-box bg-white p-4 rounded-lg shadow cursor-pointer transition hover:shadow-md"
+                            onclick="toggleFaq(this)">
+                            <div class="flex justify-between items-center">
+                                <p class="font-semibold text-gray-800">How fast will I get the report?</p>
+                                <span
+                                    class="faq-icon text-2xl text-blue-600 ml-4 transition duration-300 transform">+</span>
+                            </div>
+                            <div class="faq-content hidden mt-2 text-gray-600 text-sm border-t border-gray-100 pt-2">
+                                Most X-Ray reports are delivered digitally within 10–15 minutes.
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="space-y-5 bg-gray-50 p-6 rounded-xl shadow-xl border-t-4 border-blue-600"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-2xl font-bold text-blue-700 flex items-center">
+                            <i class="fas fa-flask mr-3"></i> Special Procedures
+                        </h3>
+
+                        <div class="faq-box bg-white p-4 rounded-lg shadow cursor-pointer transition hover:shadow-md"
+                            onclick="toggleFaq(this)">
+                            <div class="flex justify-between items-center">
+                                <p class="font-semibold text-gray-800">Are HSG, IVP, MCU, RGU procedures painful?</p>
+                                <span
+                                    class="faq-icon text-2xl text-blue-600 ml-4 transition duration-300 transform">+</span>
+                            </div>
+                            <div class="faq-content hidden mt-2 text-gray-600 text-sm border-t border-gray-100 pt-2">
+                                These procedures may cause mild discomfort but are generally safe and performed by
+                                expert doctors under continuous monitoring.
+                            </div>
+                        </div>
+
+                        <div class="faq-box bg-white p-4 rounded-lg shadow cursor-pointer transition hover:shadow-md"
+                            onclick="toggleFaq(this)">
+                            <div class="flex justify-between items-center">
+                                <p class="font-semibold text-gray-800">Do I need preparation before HSG or IVP?</p>
+                                <span
+                                    class="faq-icon text-2xl text-blue-600 ml-4 transition duration-300 transform">+</span>
+                            </div>
+                            <div class="faq-content hidden mt-2 text-gray-600 text-sm border-t border-gray-100 pt-2">
+                                Yes, some procedures require fasting or medications. Our staff will guide you with
+                                proper, detailed instructions upon booking.
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="space-y-5 bg-gray-50 p-6 rounded-xl shadow-xl border-t-4 border-blue-600"
+                        data-aos="fade-up" data-aos-delay="300">
+                        <h3 class="text-2xl font-bold text-blue-700 flex items-center">
+                            <i class="fas fa-mobile-alt mr-3"></i> Mobile & Orthopedic X-Ray
+                        </h3>
+
+                        <div class="faq-box bg-white p-4 rounded-lg shadow cursor-pointer transition hover:shadow-md"
+                            onclick="toggleFaq(this)">
+                            <div class="flex justify-between items-center">
+                                <p class="font-semibold text-gray-800">Can X-Ray detect fractures?</p>
+                                <span
+                                    class="faq-icon text-2xl text-blue-600 ml-4 transition duration-300 transform">+</span>
+                            </div>
+                            <div class="faq-content hidden mt-2 text-gray-600 text-sm border-t border-gray-100 pt-2">
+                                Yes, orthopedic X-Rays are highly accurate for detecting fractures, sprains, and other
+                                bone injuries.
+                            </div>
+                        </div>
+
+                        <div class="faq-box bg-white p-4 rounded-lg shadow cursor-pointer transition hover:shadow-md"
+                            onclick="toggleFaq(this)">
+                            <div class="flex justify-between items-center">
+                                <p class="font-semibold text-gray-800">Is Home X-Ray quality good?</p>
+                                <span
+                                    class="faq-icon text-2xl text-blue-600 ml-4 transition duration-300 transform">+</span>
+                            </div>
+                            <div class="faq-content hidden mt-2 text-gray-600 text-sm border-t border-gray-100 pt-2">
+                                Yes—our portable digital machines offer the exact same high-resolution image quality as
+                                our in-center X-Rays.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-5 bg-gray-50 p-6 rounded-xl shadow-xl border-t-4 border-blue-600"
+                        data-aos="fade-up" data-aos-delay="400">
+                        <h3 class="text-2xl font-bold text-blue-700 flex items-center">
+                            <i class="fas fa-question-circle mr-3"></i> General FAQs
+                        </h3>
+
+                        <div class="faq-box bg-white p-4 rounded-lg shadow cursor-pointer transition hover:shadow-md"
+                            onclick="toggleFaq(this)">
+                            <div class="flex justify-between items-center">
+                                <p class="font-semibold text-gray-800">Do I need appointment for all tests?</p>
+                                <span
+                                    class="faq-icon text-2xl text-blue-600 ml-4 transition duration-300 transform">+</span>
+                            </div>
+                            <div class="faq-content hidden mt-2 text-gray-600 text-sm border-t border-gray-100 pt-2">
+                                <ul class="list-disc ml-4">
+                                    <li>**Walk-in:** X-Ray, ECG</li>
+                                    <li>**Appointment Required:** Sonography, 2D Echo, Special Procedures</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-box bg-white p-4 rounded-lg shadow cursor-pointer transition hover:shadow-md"
+                            onclick="toggleFaq(this)">
+                            <div class="flex justify-between items-center">
+                                <p class="font-semibold text-gray-800">Can I get reports on WhatsApp?</p>
+                                <span
+                                    class="faq-icon text-2xl text-blue-600 ml-4 transition duration-300 transform">+</span>
+                            </div>
+                            <div class="faq-content hidden mt-2 text-gray-600 text-sm border-t border-gray-100 pt-2">
+                                Yes, we send reports via WhatsApp, Email, and provide printed copies as per your
+                                preference.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-5 bg-gray-50 p-6 rounded-xl shadow-xl border-t-4 border-blue-600"
+                        data-aos="fade-up" data-aos-delay="500">
+                        <h3 class="text-2xl font-bold text-blue-700 flex items-center">
+                            <i class="fas fa-credit-card mr-3"></i> Billing & Reports
+                        </h3>
+
+                        <div class="faq-box bg-white p-4 rounded-lg shadow cursor-pointer transition hover:shadow-md"
+                            onclick="toggleFaq(this)">
+                            <div class="flex justify-between items-center">
+                                <p class="font-semibold text-gray-800">Do you accept digital payments?</p>
+                                <span
+                                    class="faq-icon text-2xl text-blue-600 ml-4 transition duration-300 transform">+</span>
+                            </div>
+                            <div class="faq-content hidden mt-2 text-gray-600 text-sm border-t border-gray-100 pt-2">
+                                Yes, we accept all major digital payment methods including UPI (Google Pay, PhonePe),
+                                Debit, and Credit Cards.
+                            </div>
+                        </div>
+
+                        <div class="faq-box bg-white p-4 rounded-lg shadow cursor-pointer transition hover:shadow-md"
+                            onclick="toggleFaq(this)">
+                            <div class="flex justify-between items-center">
+                                <p class="font-semibold text-gray-800">Are extra report copies available?</p>
+                                <span
+                                    class="faq-icon text-2xl text-blue-600 ml-4 transition duration-300 transform">+</span>
+                            </div>
+                            <div class="faq-content hidden mt-2 text-gray-600 text-sm border-t border-gray-100 pt-2">
+                                Yes, we provide extra printed copies and electronic formats (PDF, WhatsApp) upon
+                                request.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hidden lg:flex flex-col justify-center items-center p-6 rounded-xl bg-blue-50/50 shadow-inner"
+                        data-aos="fade-up" data-aos-delay="600">
+                        <i class="fas fa-calendar-check text-4xl text-blue-600 mb-4"></i>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Still Have Questions?</h4>
+                        <a href="#appointment"
+                            class="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full transition">
+                            Contact Us Now
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section id="our-team" class="py-16 md:py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-6">
+
+                <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                    <h2 class="text-4xl font-extrabold text-gray-800">
+                        Meet Our <span class="text-blue-600 reveal-underline">Expert Team</span>
+                    </h2>
+                    <p class="mt-4 text-gray-600" data-aos="fade-up" data-aos-delay="150">
+                        Highly qualified Radiologists and experienced technicians dedicated to accurate diagnosis and
+                        patient care.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                    <div class="bg-white rounded-xl shadow-xl overflow-hidden text-center transition hover:shadow-2xl hover:scale-[1.02] duration-300"
+                        data-aos="fade-up" data-aos-delay="200">
+
+                        <img src="image/team/1.png" alt="Dr. Alok Sharma"
+                            class="w-full h-64 object-cover object-top border-b-4 border-blue-500">
+
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-blue-700">Dr. Alok Sharma</h3>
+                            <p class="text-lg font-semibold text-gray-800">Chief Radiologist</p>
+                            <p class="text-sm text-gray-600 mt-2">M.D. Radiology, D.N.B.</p>
+                            <a href="#contact"
+                                class="inline-block mt-4 text-blue-600 hover:text-blue-800 font-medium text-sm">View
+                                Profile <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-xl overflow-hidden text-center transition hover:shadow-2xl hover:scale-[1.02] duration-300"
+                        data-aos="fade-up" data-aos-delay="300">
+
+                        <img src="image/team/2.png" alt="Dr. Priya Verma"
+                            class="w-full h-64 object-cover object-top border-b-4 border-blue-500">
+
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-blue-700">Dr. Priya Verma</h3>
+                            <p class="text-lg font-semibold text-gray-800">Sonography Specialist</p>
+                            <p class="text-sm text-gray-600 mt-2">D.M.R.D., Specialist in Fetal Imaging</p>
+                            <a href="#contact"
+                                class="inline-block mt-4 text-blue-600 hover:text-blue-800 font-medium text-sm">View
+                                Profile <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-xl overflow-hidden text-center transition hover:shadow-2xl hover:scale-[1.02] duration-300"
+                        data-aos="fade-up" data-aos-delay="400">
+
+                        <img src="image/team/3.png" alt="Mr. Rohan Patil"
+                            class="w-full h-64 object-cover object-top border-b-4 border-blue-500">
+
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-blue-700">Mr. Rohan Patil</h3>
+                            <p class="text-lg font-semibold text-gray-800">Senior Technician</p>
+                            <p class="text-sm text-gray-600 mt-2">B.Sc. in Radiography, 10+ Years Exp.</p>
+                            <a href="#contact"
+                                class="inline-block mt-4 text-blue-600 hover:text-blue-800 font-medium text-sm">View
+                                Profile <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-xl overflow-hidden text-center transition hover:shadow-2xl hover:scale-[1.02] duration-300"
+                        data-aos="fade-up" data-aos-delay="500">
+
+                        <img src="image/team/1.png" alt="Ms. Sunita Rao"
+                            class="w-full h-64 object-cover object-top border-b-4 border-blue-500">
+
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-blue-700">Ms. Sunita Rao</h3>
+                            <p class="text-lg font-semibold text-gray-800">Patient Coordinator</p>
+                            <p class="text-sm text-gray-600 mt-2">Ensuring a seamless patient journey and comfort.</p>
+                            <a href="#contact"
+                                class="inline-block mt-4 text-blue-600 hover:text-blue-800 font-medium text-sm">View
+                                Profile <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="text-center mt-16 p-8 bg-blue-100 rounded-xl shadow-inner" data-aos="zoom-in">
+                    <h4 class="text-3xl font-bold text-gray-800 mb-4">Ready to Consult Our Experts?</h4>
+                    <a href="#appointment"
+                        class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition duration-300 shadow-md">
+                        Book Your Appointment Today <i class="fas fa-calendar-alt ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="testimonials" class="py-16 md:py-20 bg-blue-50 relative">
+            <div class="max-w-7xl mx-auto px-6">
+
+                <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                    <h2 class="text-4xl font-extrabold text-gray-800">
+                        What Our Patients <span class="text-blue-600 reveal-underline">Say</span>
+                    </h2>
+                    <p class="mt-4 text-gray-600" data-aos="fade-up" data-aos-delay="150">
+                        Hear from the community about their experience with our accurate reporting and compassionate
+                        care.
+                    </p>
+                </div>
+
+                <div
+                    class="absolute opacity-40 w-12 h-12 bg-blue-100 rounded-full float-lr hidden md:block right-1/4 top-1/4 translate-x-1/2 z-0">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <div class="p-8 bg-white rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 relative z-10"
+                        data-aos="zoom-in" data-aos-delay="200">
+
+                        <i class="fas fa-quote-left text-blue-400 text-3xl mb-4"></i>
+                        <p class="text-gray-700 italic mb-4">
+                            "The X-Ray report was delivered incredibly fast, and the clarity was excellent. Highly
+                            professional service from start to finish. I highly recommend this center for diagnostics."
+                        </p>
+                        <div class="flex items-center pt-2 border-t border-gray-100">
+                            <div
+                                class="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center text-blue-700 font-bold mr-3">
+                                A.S.
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800">Anjali Sharma</p>
+                                <p class="text-sm text-gray-500">Digital X-Ray Patient</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-8 bg-white rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 relative z-10"
+                        data-aos="zoom-in" data-aos-delay="300">
+
+                        <i class="fas fa-quote-left text-blue-400 text-3xl mb-4"></i>
+                        <p class="text-gray-700 italic mb-4">
+                            "I was very anxious about my HSG procedure, but the doctor and staff were incredibly patient
+                            and gentle. They explained everything clearly, minimizing discomfort. Truly caring
+                            professionals."
+                        </p>
+                        <div class="flex items-center pt-2 border-t border-gray-100">
+                            <div
+                                class="w-12 h-12 bg-green-200 rounded-full flex items-center justify-center text-green-700 font-bold mr-3">
+                                R.K.
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800">Rajesh Kulkarni</p>
+                                <p class="text-sm text-gray-500">Special Procedures Patient</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-8 bg-white rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 relative z-10"
+                        data-aos="zoom-in" data-aos-delay="400">
+
+                        <i class="fas fa-quote-left text-blue-400 text-3xl mb-4"></i>
+                        <p class="text-gray-700 italic mb-4">
+                            "We needed a mobile X-Ray for my grandfather at home. The technician arrived promptly with
+                            modern equipment, and the digital report was sent quickly. Excellent home service for
+                            elderly patients."
+                        </p>
+                        <div class="flex items-center pt-2 border-t border-gray-100">
+                            <div
+                                class="w-12 h-12 bg-red-200 rounded-full flex items-center justify-center text-red-700 font-bold mr-3">
+                                P.D.
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800">Priya Deshmukh</p>
+                                <p class="text-sm text-gray-500">Mobile X-Ray Service</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+
+        <section id="contact" class="py-16 md:py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+
+                <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                    <h2 class="text-4xl font-extrabold text-gray-800">
+                        Get In <span class="text-blue-600 reveal-underline">Touch</span>
+                    </h2>
+                    <p class="mt-4 text-gray-600" data-aos="fade-up" data-aos-delay="150">
+                        Visit our center or contact us directly to schedule your appointment or inquire about our
+                        services.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+                    <div data-aos="fade-right" data-aos-delay="200">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Reach Our Center</h3>
+
+                        <div class="space-y-6 mb-10">
+
+                            <div
+                                class="flex items-start p-4 bg-gray-50 rounded-xl shadow-md border-l-4 border-blue-500">
+                                <i class="fas fa-map-marker-alt text-2xl text-blue-600 mr-4 mt-1"></i>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Address (पत्ता)</p>
+                                    <p class="text-gray-700 font-medium mb-1">
+                                        Behind Namjoshi Petrol Pump, Ring Road, Laxminagar, Phaltan.
+                                    </p>
+                                    <a href="https://maps.app.goo.gl/YourActualMapLink" target="_blank"
+                                        class="text-blue-600 text-sm font-semibold hover:underline mt-1 block">
+                                        Get Directions <i class="fas fa-external-link-alt text-xs ml-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div
+                                class="flex items-start p-4 bg-gray-50 rounded-xl shadow-md border-l-4 border-blue-500">
+                                <i class="fas fa-phone-alt text-2xl text-blue-600 mr-4 mt-1"></i>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Phone (संपर्क क्रमांक)</p>
+                                    <p class="text-gray-600 leading-relaxed">
+                                        <a href="tel:+919930446307" class="hover:text-blue-700 block">+91 99304
+                                            46307</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div
+                                class="flex items-start p-4 bg-gray-50 rounded-xl shadow-md border-l-4 border-blue-500">
+                                <i class="fas fa-envelope text-2xl text-blue-600 mr-4 mt-1"></i>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Email</p>
+                                    <p class="text-gray-600 leading-relaxed">
+                                        <a href="mailto:contact@diagnosticcenter.com"
+                                            class="hover:text-blue-700 block">contact@diagnosticcenter.com</a>
+                                        <a href="mailto:support@diagnosticcenter.com"
+                                            class="hover:text-blue-700 block">support@diagnosticcenter.com</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Send Us a Quick Message</h3>
+
+                        <form action="#" method="POST"
+                            class="space-y-4 bg-gray-50 p-6 rounded-xl shadow-2xl border border-gray-100">
+                            <input type="text" placeholder="Your Name" required
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            <input type="email" placeholder="Your Email" required
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            <input type="tel" placeholder="Your Phone Number" required
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            <textarea placeholder="Your Message / Query" rows="4" required
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"></textarea>
+                            <button type="submit"
+                                class="w-full px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300 shadow-lg">
+                                Submit Inquiry <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </form> -->
+
+                    </div>
+
+                    <div data-aos="fade-left" data-aos-delay="200">
+                        <div class="rounded-xl shadow-2xl overflow-hidden border-4 border-blue-200">
+                            <iframe
+                                src="https://maps.google.com/maps?q=City+Heights,+Near+Maharaja+Mangal+Karyalaya,+Laxminagar,+Phaltan+415523&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="Aarambh Digital X-Ray Center Location"
+                                class="w-full h-[400px] lg:h-[700px]"></iframe>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <div class="fixed bottom-24 md:bottom-5 right-5 flex flex-col items-end space-y-4 z-50">
+        <a href="tel:+919930446307"
+            class="bg-blue-600 hover:bg-blue-700 text-white w-14 h-14 rounded-full shadow-xl flex items-center justify-center text-2xl transition-all duration-300 float-animation"
+            title="Call Now">
+            <i class="fas fa-phone-alt"></i>
+        </a>
+
+        <a href="https://wa.me/919930446307" target="_blank"
+            class="bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-all duration-300 float-animation"
+            title="WhatsApp Us">
+            <i class="fab fa-whatsapp text-3xl"></i>
+        </a>
+    </div>
+
+    <button id="backToTop"
+        class="fixed bottom-64 md:bottom-48 right-5 bg-blue-600 text-white w-12 h-12 rounded-full shadow-xl flex items-center justify-center text-xl hover:scale-110 transition-all duration-300 z-[999] opacity-0 invisible">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <footer class="bg-blue-900 text-white pt-12 pb-6">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-10 border-b border-blue-800 pb-10">
+
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <!-- <h4 class="text-3xl font-extrabold text-blue-300 mb-3">
+                        <i class="fas fa-microscope mr-2"></i> Diagnostics
+                    </h4> -->
+
+                    <div class="flex items-center space-x-3">
+                        <img src="image/logo.jpg" class="h-10 md:h-12 drop-shadow-lg float-animation"
+                            alt="Abhang Diagnostic Center Logo" />
+
+                        <h1 class="tracking-wide">
+                            <span class="block text-lg md:text-1xl font-bold 
+            bg-gradient-to-r from-blue-600 to-blue-800 text-white bg-clip-text leading-tight whitespace-nowrap">
+                                Abhang Diagnostic Center
+                            </span>
+                            <span class="block text-xs text-white font-semibold tracking-wider">
+                                Sonography and X-ray Clinic
+                            </span>
+                        </h1>
+                    </div>
+
+                    <p class="text-sm text-blue-200 mt-4">
+                        Providing precise and timely radiological assessments for better health outcomes across the
+                        region.
+                    </p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-blue-300 hover:text-white transition"><i
+                                class="fab fa-facebook-f text-xl"></i></a>
+                        <a href="#" class="text-blue-300 hover:text-white transition"><i
+                                class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-blue-300 hover:text-white transition"><i
+                                class="fab fa-linkedin-in text-xl"></i></a>
+                        <a href="#" class="text-blue-300 hover:text-white transition"><i
+                                class="fab fa-instagram text-xl"></i></a>
+                    </div>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <h5 class="text-xl font-semibold mb-4 text-blue-100">Quick Links</h5>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#home" class="text-blue-300 hover:text-white transition">Home</a></li>
+                        <li><a href="#services" class="text-blue-300 hover:text-white transition">Our Services</a></li>
+                        <li><a href="#procedures" class="text-blue-300 hover:text-white transition">Special
+                                Procedures</a></li>
+                        <li><a href="#testimonials" class="text-blue-300 hover:text-white transition">Testimonials</a>
+                        </li>
+                        <li><a href="#faq" class="text-blue-300 hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <h5 class="text-xl font-semibold mb-4 text-blue-100">Contact Us</h5>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-blue-300 mr-3 mt-1"></i>
+                            <span class="text-blue-300">Behind Namjoshi Petrol Pump, Ring Road, Laxminagar,
+                                Phaltan.</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-blue-300 mr-3"></i>
+                            <a href="tel:+919930446307" class="text-blue-300 hover:text-white transition">+91 99304
+                                46307</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-blue-300 mr-3"></i>
+                            <a href="mailto:contact@diagnosticcenter.com"
+                                class="text-blue-300 hover:text-white transition">contact@diagnosticcenter.com</a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-blue-300 mr-3 mt-1"></i>
+                            <span class="text-blue-300">
+                                <strong>Sonography:</strong> 8AM - 6PM <br>
+                                <strong>X-Ray:</strong> 8AM - 8PM
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="400">
+                    <h5 class="text-xl font-semibold mb-4 text-blue-100">Stay Updated</h5>
+                    <p class="text-sm text-blue-300 mb-4">
+                        Subscribe to receive health tips and center updates.
+                    </p>
+                    <form class="space-y-3">
+                        <input type="email" placeholder="Enter your email" required
+                            class="w-full p-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        <button type="submit"
+                            class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-lg transition">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="mt-6 text-center text-sm text-blue-400">
+                <p>&copy; 2025 Digital Diagnostics Center. All Rights Reserved.</p>
+                <div class="mt-2 space-x-4">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <span class="text-blue-600">|</span>
+                    <a href="#" class="hover:text-white transition">Terms of Service</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+
+        // ===========================================
+        // 4. SCROLL PROGRESS BAR
+        // ===========================================
+        const scrollProgress = document.getElementById("scrollProgress");
+        const updateScrollProgress = () => {
+            const scrollPercent =
+                (window.scrollY /
+                    (document.documentElement.scrollHeight - window.innerHeight)) *
+                100;
+            scrollProgress.style.width = scrollPercent + "%";
+        };
+        window.addEventListener("scroll", updateScrollProgress);
+        document.addEventListener("DOMContentLoaded", updateScrollProgress);
+
+        // ===========================================
+        // 5. PRELOADER
+        // ===========================================
+        const preloader = document.getElementById("preloader");
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                preloader.style.opacity = "0";
+                setTimeout(() => {
+                    preloader.style.display = "none";
+                }, 700);
+            }, 500);
+        });
+
+        // ===========================================
+        // 6. BACK TO TOP BUTTON
+        // ===========================================
+        const backToTopBtn = document.getElementById("backToTop");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.remove("invisible", "opacity-0");
+                backToTopBtn.classList.add("visible", "opacity-100");
+            } else {
+                backToTopBtn.classList.remove("visible", "opacity-100");
+                backToTopBtn.classList.add("invisible", "opacity-0");
+            }
+        });
+
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        });
+
+        // ===========================================
+        // NAVBAR MODIFICATIONS (Mobile Menu Toggle)
+        // ===========================================
+        const menuToggle = document.getElementById("menuToggle");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+            // Toggle icon
+            menuToggle.querySelector("i").classList.toggle("fa-bars");
+            menuToggle.querySelector("i").classList.toggle("fa-times");
+        });
+
+        // ===========================================
+        // HERO SLIDER
+        // ===========================================
+        let currentSlide = 0;
+        const slides = document.querySelectorAll(".slide");
+        const slideProgress = document.getElementById("slideProgress");
+        const slideIntervalTime = 5000; // 5 seconds
+
+        const showSlide = (index) => {
+            slides.forEach((slide, i) => {
+                slide.classList.remove("opacity-100");
+                slide.classList.add("opacity-0");
+            });
+            slides[index].classList.remove("opacity-0");
+            slides[index].classList.add("opacity-100");
+
+            currentSlide = index;
+            resetProgress();
+        };
+
+        const nextSlide = () => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        };
+
+        // Expose functions to global scope for HTML button clicks
+        window.prevSlide = () => {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        };
+        window.nextSlide = nextSlide;
+
+        let slideTimer;
+        let progressStartTime;
+
+        const startSlider = () => {
+            progressStartTime = Date.now();
+            slideTimer = setInterval(nextSlide, slideIntervalTime);
+        };
+
+        const resetProgress = () => {
+            clearInterval(slideTimer);
+            slideProgress.style.transition = "none";
+            slideProgress.style.width = "0";
+            // Force reflow
+            void slideProgress.offsetWidth;
+
+            setTimeout(() => {
+                slideProgress.style.transition = `width ${slideIntervalTime / 1000
+                    }s linear`;
+                slideProgress.style.width = "100%";
+                startSlider();
+            }, 100);
+        };
+
+        // Initial setup on load
+        document.addEventListener("DOMContentLoaded", () => {
+            showSlide(0);
+            startSlider();
+        });
+
+        // Pause on mouse hover
+        const heroSlider = document.getElementById("heroSlider");
+        heroSlider.addEventListener("mouseenter", () => {
+            clearInterval(slideTimer);
+            slideProgress.style.transition = "none";
+            const elapsedTime = Date.now() - progressStartTime;
+            const currentWidth = (elapsedTime / slideIntervalTime) * 100;
+            slideProgress.style.width = currentWidth + "%";
+        });
+
+        heroSlider.addEventListener("mouseleave", () => {
+            // Restart the cycle by immediately triggering the next slide
+            nextSlide();
+        });
+    </script>
+
+    <script>
+        // ===================================
+        // 11. Number Counters Implementation 
+        // ===================================
+        const counters = document.querySelectorAll('.counter');
+        const speed = 250; // Controls the animation speed (higher = faster)
+
+        const startCounter = (counter) => {
+            const target = +counter.getAttribute('data-target');
+            const initialText = counter.innerText;
+            let count = 0;
+            const increment = target / speed;
+
+            const update = () => {
+                if (count < target) {
+                    count += increment;
+                    // Use Math.floor to ensure integer counting
+                    counter.innerText = Math.floor(count).toLocaleString('en-IN');
+                    setTimeout(update, 1);
+                } else {
+                    // Ensure it stops exactly at the target, formatted
+                    counter.innerText = target.toLocaleString('en-IN');
+                }
+            };
+            update();
+        }
+
+        // Intersection Observer to start counting when scrolled into view
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    startCounter(entry.target);
+                    observer.unobserve(entry.target); // Stop observing once counted
+                }
+            });
+        }, { threshold: 0.5 }); // Start when 50% of the element is visible
+
+        counters.forEach(counter => {
+            counterObserver.observe(counter);
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Find all elements that need the scroll-triggered running underline effect
+            const elementsToAnimate = document.querySelectorAll('.reveal-underline');
+
+            // Configuration for the Intersection Observer
+            const observerOptions = {
+                root: null, // Relative to the viewport
+                rootMargin: '0px',
+                threshold: 0.8 // Trigger when 80% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    // If the element is intersecting (i.e., visible in the viewport)
+                    if (entry.isIntersecting) {
+                        // 1. Add the active class to start the running animation
+                        entry.target.classList.add('reveal-active');
+
+                        // 2. Stop observing this element since the animation only runs once
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Start observing all the target elements
+            elementsToAnimate.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+
+    <script>
+        /**
+         * Toggles the visibility of the FAQ answer content.
+         * Also changes the '+' icon to a '-' icon when open.
+         * @param {HTMLElement} element The clicked 'faq-box' div.
+         */
+        function toggleFaq(element) {
+            // 1. Find the answer content (the div with class 'faq-content')
+            const content = element.querySelector('.faq-content');
+
+            // 2. Find the icon element (the span with class 'faq-icon')
+            const icon = element.querySelector('.faq-icon');
+
+            // 3. Toggle the 'hidden' class on the content
+            if (content.classList.contains('hidden')) {
+                // Show content
+                content.classList.remove('hidden');
+                // Change icon from + to - and rotate it visually
+                icon.textContent = '–'; // Use an en-dash or similar character
+                icon.classList.add('rotate-180');
+            } else {
+                // Hide content
+                content.classList.add('hidden');
+                // Change icon back to + and remove rotation
+                icon.textContent = '+';
+                icon.classList.remove('rotate-180');
+            }
+
+            // Optional: Close all other open FAQs (Accordion style)
+            document.querySelectorAll('.faq-box').forEach(box => {
+                if (box !== element) {
+                    box.querySelector('.faq-content').classList.add('hidden');
+                    box.querySelector('.faq-icon').textContent = '+';
+                    box.querySelector('.faq-icon').classList.remove('rotate-180');
+                }
+            });
+        }
+    </script>
+
+    <script>
+        // Inside your existing document.addEventListener('DOMContentLoaded', function () { ... });
+
+        // Preloader logic: Hides the preloader once the page is fully loaded
+        window.addEventListener('load', function () {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                // Start fading out the preloader
+                preloader.style.opacity = '0';
+
+                // Remove the preloader from the DOM after the transition finishes
+                setTimeout(function () {
+                    preloader.remove();
+                }, 700); // Must match the transition-opacity duration
+            }
+        });
+    </script>
+
+
+    <div id="mobile-cta-bar"
+        class="fixed bottom-0 left-0 right-0 w-full bg-white border-t border-gray-200 shadow-2xl z-[9999] flex justify-around p-2 xl:hidden">
+
+        <a href="tel:+919930446307"
+            class="flex flex-col items-center text-xs font-semibold text-green-600 hover:text-green-700 transition duration-200 px-1">
+            <i class="fas fa-phone-alt text-lg mb-1"></i>
+            <span>Call</span>
+        </a>
+
+        <a href="https://wa.me/919930446307" target="_blank"
+            class="flex flex-col items-center text-xs font-semibold text-blue-600 hover:text-blue-700 transition duration-200 px-1">
+            <i class="fab fa-whatsapp text-lg mb-1"></i>
+            <span>Chat</span>
+        </a>
+
+        <a href="#appointment"
+            class="flex flex-col items-center text-xs font-bold bg-blue-600 text-white rounded-lg px-2 py-1 shadow-lg hover:bg-blue-700 transition duration-200 transform scale-105">
+            <i class="fas fa-calendar-check text-lg mb-1"></i>
+            <span>Book</span>
+        </a>
+
+        <a href="#contact"
+            class="flex flex-col items-center text-xs font-semibold text-gray-600 hover:text-gray-700 transition duration-200 px-1">
+            <i class="fas fa-map-marker-alt text-lg mb-1"></i>
+            <span>Maps</span>
+        </a>
+
+        <a href="https://facebook.com/AarambhXRayCenter" target="_blank"
+            class="flex flex-col items-center text-xs font-semibold text-blue-800 hover:text-blue-900 transition duration-200 px-1">
+            <i class="fab fa-facebook-f text-lg mb-1"></i>
+            <span>FB</span>
+        </a>
+
+        <a href="https://instagram.com/AarambhXRayCenter" target="_blank"
+            class="flex flex-col items-center text-xs font-semibold text-pink-600 hover:text-pink-700 transition duration-200 px-1">
+            <i class="fab fa-instagram text-lg mb-1"></i>
+            <span>Insta</span>
+        </a>
+    </div>
+</body>
+
+</html>
